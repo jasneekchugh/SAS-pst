@@ -1,25 +1,24 @@
-/* INPUT NAME$ STATE$; */
-/* CARDS; */
-/* A UP */
-/* B MP */
-/* C RJ */
-/* D GJ */
-/* E UP */
-/* F MP */
-/* G RJ */
-/* H GJ */
-/* ; */
-/* RUN; */
-/*  */
-/* dATA JASNEEK; */
-/* SET PST; */
-/* RANDOM=RANUNI(4688); */
-/* RUN; */
-/*  */
-/*  */
-/* PROC SORT DATA=JASNEEK; */
-/* BY RANDOM; */
-/* RUN; */
+INPUT NAME$ STATE$; 
+CARDS; 
+A UP 
+B MP 
+C RJ 
+D GJ 
+E UP 
+F MP 
+G RJ 
+H GJ 
+; 
+RUN; 
+
+DATA JASNEEK; 
+SET PST; 
+RANDOM=RANUNI(4688); 
+RUN; 
+
+PROC SORT DATA=JASNEEK; 
+BY RANDOM; 
+RUN; 
 
 PROC SURVEYSELECT DATA=PST SAMPSIZE=4 OUT=ASWIN;
 RUN;
