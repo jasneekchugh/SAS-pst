@@ -102,4 +102,3 @@ if age<14;
 if age<13;
 if age<15;
 run;
-
