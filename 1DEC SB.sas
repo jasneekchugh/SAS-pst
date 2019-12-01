@@ -26,12 +26,14 @@ keep country state predict;
 run;
 
 /* 1.4 (c) */
-proc sort data=sashelp.prdsal2 out=outputb;
+proc sort data=sashelp.prdsal2 out=test1;
 by predict;
 run;
 
 /* 1.5 */
-proc means data=
+proc means data=test1 mean;
+var predict; 
+run;
 
 
 
