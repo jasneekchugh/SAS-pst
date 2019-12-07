@@ -1,0 +1,1184 @@
+
+/*Numeric Fuctions*/
+
+data test;
+x1=1; y= 20;x2=1; x3=1; x4=1; x5=.;
+/* tot = sum(x1,x2,x3,x4,x5); */
+tot= sum(of x1-x7);
+tot1 = sum(of x1--x5);
+tot2 = sum(of x:);
+
+run;
+
+
+data test;
+x1=1;y= 20;x2=1;x5=.;  x3=1; x4=1;y1=2;y2 = 4; y3 = 6; 
+tot= sum(of x1-x5,of y1-y3 );
+
+run;
+
+
+
+data test;
+jan=1;yoyo=1; feb=1;mar=1;yyyy=1; t=.;apr=1;
+put _ALL_;
+/* tot= sum(of jan-apr); */
+/* tot1= sum(of y:); */
+mean= mean(of jan--apr);
+st = std ( of jan -- apr);
+N= n(of jan--apr);
+n_miss= nmiss(of jan--apr);
+min= min (of jan -- apr);
+
+run;
+
+
+
+data test;
+x1= 1; x2= 1;x4 = .;  x3 = .; x5= 1;
+mean= mean(of x1--x3);
+
+run;
+
+
+
+
+
+
+
+data test;
+x1=1; yoyo= 20;x21=1; x3yz=1; x4oo=1; x5676=.;
+tot2 = sum(of x:);
+/*keep x:;*/
+run;
+proc print;
+run;
+
+
+
+data test;
+x1= 10; x2= 100;
+x3= sum(x2, - x1);
+run;
+proc print;
+run;
+
+
+
+
+
+data test;
+x= 10;
+y = '10';
+z= x*y;
+z1 = x**y;
+z2= sum(x,y);
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+data test;
+x= 1;
+y= '$2';
+z = 3;
+tot = sum(x,y,z);
+tot1 = sum(x+y+z, x);
+tot2= x+y+z;
+run;
+
+
+
+data test;
+x= '$2000';
+y = 2;
+z= x*y;
+run;
+proc print;
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+data t1;
+x= '$10';
+y = 10;
+z =sum( x+y, '$1', 10)+200;
+run;
+proc print;
+run;
+
+
+
+
+
+
+
+data t1;
+x= '$10';
+y = 10;
+z = input (x, dollar3.);
+run;
+proc print;
+run;
+
+
+
+
+
+data t1;
+x= '$10';
+y = 10;
+
+z =sum( input (x, dollar3.) +y+ 10)+200;
+run;
+proc print;
+run;
+
+
+
+
+
+
+
+
+
+
+
+data t1;
+x= '31dec1959';
+y = 10;
+z= input(x, date9.)+y;
+run;
+proc print;
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Character Functions*/
+
+Data test;
+input nameage $10.;
+datalines;
+24Ram
+26Albert
+98Bob
+;
+run;
+
+data test1;
+set test;
+age= substr(nameage,1,2);
+name = substr(nameage,3);
+drop nameage;
+run;
+proc print;
+run;
+
+
+
+Data test;
+input nameage $10.;
+datalines;
+Ram24 
+Albertaa26
+Bob85
+;
+run;
+
+data test1;
+set test;
+age = reverse(substr(left(reverse(nameage)), 1,2));
+name = reverse(substr(left(reverse(nameage)), 3));
+run;
+proc print ; run;
+
+
+data test1;
+set test;
+x = length(nameage);
+age = substr(nameage, length(nameage)-1);
+name = substr(nameage,1, length(nameage)-2);
+run;
+proc print ; run;
+
+
+
+
+
+
+
+data test;
+name= '   A      B   cccc      C    ';
+n1= compress(name);
+run;
+proc print ; run;
+
+
+
+
+
+data test;
+name= '   A-----B *%  cccc  ||||^^^^    C \\\   ';
+n1= compress(name,'-*%|^\ ');
+run;
+proc print ; run;
+
+
+Data test;
+input nameage $10.;
+datalines;
+Ram2400
+Albert126
+Bob85
+;
+run;
+
+data test1;
+set test;
+/*propcase*/
+name= compress(nameage, '1234567890');
+num= compress(lowcase(nameage), 'abcdefghijklmnopqrstuvwxyz');
+run;
+proc print;
+run;
+
+
+data test1;
+str= 'Alfa#@^  Beta';
+name = compress(str,'#@^');
+run;
+proc print;
+run;
+
+
+data test1;
+str= 'Mr.            John                  Stimpson       Jr.     ';
+name = compbl(str);
+run;
+proc print;
+run;
+
+data test2;
+input phnum $20.;
+datalines;
++91 0124 4009752
++91 011 56565698
++91 022 12345678
+;
+run;
+
+data test3;
+set test2;
+substr(phnum, 1,3) = '+95';
+run;
+proc print;
+run;
+
+data test2;
+input phnum $20.;
+datalines;
++91 0124 4009752
+011 +91 56565698
+022 12345678 +91
++75 011 12345678
+;
+run;
+proc print;
+run;
+
+data test3;
+set test2;
+x = index(phnum, '+91');
+if x > 0 then 
+substr(phnum, x, 3) = '+95';
+run;
+proc print;
+run;
+
+
+data test2;
+input phnum $25.;
+datalines;
++91 0124 +91 4009752 +92
+011 +91 56565698 +92
+022 12345678 +91 +92
++75 011 12345678 +92
++91 011 12345678 +92 +91
+;
+run;
+
+data test3;
+set test2; 
+new_phnum=tranwrd(phnum, '+91', '+9555');
+new_phnum=tranwrd(tranwrd(phnum, '+91', '+9555'),'+92', '00');
+run;
+proc print;
+run;
+
+
+
+
+
+data test2;
+input phnum $40.;
+datalines;
+(+91)     0124       4009752
+    (+91)    011       56565698
+(+91)   022  12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1);
+STD= scan(phnum,2);
+PH= scan(phnum,3);
+run;
+proc print;
+run;
+
+
+data test2;
+input phnum $40.;
+datalines;
+(+91)     0124       4009752
+    (+91)    011       56565698
+(+91)   022  12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1,' ');
+STD= scan(phnum,2,' ');
+PH= scan(phnum,3,' ');
+run;
+proc print;
+run;
+
+
+data test2;
+input phnum $40.;
+datalines;
+(+91)     0124     :-*  4009752
+    (+91)    011      & 56565698
+(+91)  #% 022  12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1,' -:%#&*');
+STD= scan(phnum,2,' -:%#&*');
+PH= scan(phnum,3,' -:%#&*');
+run;
+proc print ; run;
+
+data test2;
+input phnum $29.;
+datalines;
+(+91)     0124    04009752
+    (+91)     011 56565698 A
+(+91)     022    12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1,'+');
+/*STD= scan(phnum,2,'+');*/
+/*PH= scan(phnum,3,' ');*/
+PH1= scan(phnum,4,' ');
+
+run;
+proc print;
+run;
+
+
+
+
+data test3;
+x= 'I love India';
+w1= scan(x,-1);
+w2= scan(x,2);
+w3= scan(x,3);
+run;
+proc print;
+run;
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname= pre||fname||lname;
+fullname1= compress(pre||fname||lname);
+fullname2= compbl(pre||fname||lname);
+run;
+proc print;
+run;
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson  Jr.   ';
+fullname=trim(pre)||' '||trim(fname)||' '||strip(lname) ;
+run;
+proc print;
+run;
+
+
+
+data test;
+Pre=  '        Mr.   John    Stimpson          ';
+x= 'Name:- '||strip(pre);
+run;
+proc print;
+run;
+
+
+
+
+
+data test;
+
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname=  cat(pre,fname,lname);
+run;
+proc print;
+run;
+
+
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson   Jr.    ';
+fullname= cats(pre,fname,lname);
+fullname1= compress(cat(pre,fname,lname));
+run;
+proc print;
+run;
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname1= catx(pre,fname,lname);
+run;
+proc print;
+run;
+
+
+
+/*date functions*/
+
+data test;
+x= today();
+y= date();
+format x y date9.;
+run;
+
+Data test;
+set sashelp.air(firstobs= 10 obs = 20 );
+format date weekdate20.;
+day= day(date);
+mon = month(date);
+yr= year(date);
+wkdy = weekday(date);
+qt = qtr(date);
+run;
+
+
+
+Data t2;
+set test(keep = day mon yr);
+format comp_date  weekdate20.;
+
+comp_date = mdy(mon,day,yr);
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+Data t2;
+d= 12;
+m= '1';
+y= 1960;
+date = mdy(d,m,y);
+format date date9.;
+run;
+
+
+
+
+
+
+
+
+data test1;
+x= 'Books';
+y= 2013;
+name= x||y;
+name1 = y||x;
+/*name1 = cats(x,y);*/
+run;
+proc print;
+run;
+
+
+
+
+
+data test1;
+x= 'Books';
+y= '01JAN1960'd;
+name= x||Y ;
+run;
+proc print;
+run;
+
+
+
+
+data test1;
+x= 'Books';
+y= 10;
+name= x||put(y,date9.) ;
+run;
+proc print;
+run;
+
+
+
+/*Assignment*/
+
+data test;
+input dept $ prod $;
+datalines;
+D1 a
+D1 b
+D1 c
+D1 d
+D2 x
+D2 y
+D3 x11
+D3 x12
+D3 x13
+D3 x14
+;
+run;
+/*DESIRED OUTPUT*/
+/*dept products*/
+/*d1 A,B,C,D*/
+/*D2 X,Y*/
+/*D3 X11,X12,X13,X14*/
+
+
+
+DATA TEST;
+X= 1234567890;
+Y= '('||SUBSTR(X,1,3)||')';
+RUN;
+
+proc print;
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+options yearcutoff= 2059;
+
+data test;
+/*dt = '31jan1960'd;*/
+dt1 = '31jan58'd;
+/*tm = '00:01:01't;*/
+/*dtt = '31dec1959:23:59:59'dt;*/
+format dt1 date9.;
+run;
+
+
+
+data test;
+dtt = '31dec1959:23:59:59'dt;
+date= datepart(dtt);
+time = timepart(dtt);
+/*format date  time time5.;*/
+run;
+
+data test;
+beg_d= intnx('month', '27jan2016'd,-3);
+end_d= intnx('month', '31jan2016'd, -3, 'E');
+format beg_d  end_d date9.;
+run;
+
+proc print ; run;
+
+
+
+
+
+
+
+
+
+
+
+
+options yearcutoff =1920;
+
+data t1;
+/* x= intnx('month','11jan1960'd,-1,'B'); */
+/* y= intnx('year','1feb1960'd,-1); */
+/* x = intnx('year','31jan16'd,4); */
+x2= intnx('month',intnx('year','31jan16'd,4), 1);
+
+format x x1 y  x2 date9.;
+run;
+proc print;
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+data t1;
+x= intnx('year',10,-1,'E');
+format x date9.;
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+data t1;
+/* x= intck('month', '01jan1960'd, '01Dec1960'd ); */
+/* y= intck('year', '01jan1960'd, '31Dec1959'd ); */
+/* y1= intck('year', '31Dec1959'd, '01jan1960'd ); */
+/* y2= intck('weekday',  '01jan2016'd,'31jan2016'd ); */
+/**/
+/*y3 = intck('week.2','07feb2016'd,'29feb2016'd);*/
+/**/
+y5 = intck('week.7','07feb2017'd,'28feb2017'd);
+/* 	+ intck('week.1','07feb2017'd,'28feb2017'd); */
+run;
+
+
+
+
+/*Character Functions*/
+
+Data test;
+input nameage $10.;
+datalines;
+24Ram
+26Albert
+98Bob
+;
+run;
+
+
+data test1;
+set test;
+age= substr(nameage,1,2);
+name = substr(nameage,3);
+drop nameage;
+run;
+
+
+data test1;
+set test;
+x = length(nameage);
+run;
+
+
+/* Assignment */
+Data test;
+input nameage $10.;
+datalines;
+Ram24
+Albertaa26
+Bob85
+AB23
+;
+run;
+
+data test1;
+set test;
+name = ???;
+age = ???;
+run;
+
+
+
+
+
+
+data test;
+name= '   A      B   cccc      C    ';
+n1= compress(name);
+run;
+
+
+
+
+
+
+data test;
+name= '   A-----B *%  cccc  ||||^^^^    C \\\   ';
+n1= compress(name,'-*%|^\ ');
+run;
+
+
+
+Data test;
+input namenum $10.;
+datalines;
+Ram2400
+Albert126
+Bob85
+;
+run;
+
+data test1;
+set test;
+/*propcase - only first letter becomes capital /  lowcase*/
+name= compress(namenum, '1234567890');
+num= compress(upcase(namenum) , 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+run;
+
+
+
+data test1;
+str= 'Mr.            John                  Stimpson       Jr.     ';
+name = COMPBL(str);
+run;
+
+
+
+
+
+
+data test2;
+input phnum $20.;
+datalines;
++91 0124 4009752
++91 011  56565698
++91 022 12345678
++75 011 12345678
+;
+run;
+data test3;
+set test2;
+x= index(phnum, '+91');
+if index(phnum, '+91') > 0 then substr(phnum, 1, 3) = '+95';
+run;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+data test2;
+input phnum $20.;
+datalines;
++91 0124 4009752
+011 +91 56565698
+022 12345678 +91
++75 011 12345678
+;
+run;
+
+data test3;
+set test2;
+if index(phnum, '+91') > 0 then 
+substr(phnum, index(phnum, '+91'), 3) = '+95';
+run;
+
+
+
+data test2;
+input phnum $25.;
+datalines;
++91 0124 +91 4009752 +92
+011 +91 56565698 +92
+022 12345678 +91 +92
++75 011 12345678 +92
++91 011 12345678 +92 +91
+;
+run;
+
+data test3;
+set test2; 
+new_phnum=tranwrd(phnum, '+91', '+9555');
+run;
+
+
+
+
+data test2;
+input phnum $40.;
+datalines;
+(+91)     0124       4009752
+    (+91)    011       56565698
+(+91)   022  12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1);
+STD= scan(phnum,2);
+PH= scan(phnum,3);
+run;
+
+
+data test2;
+input phnum $40.;
+datalines;
+(+91)     0124       4009752
+    (+91)    011       56565698
+(+91)   022  12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1,' ');
+STD= scan(phnum,2,' ');
+PH= scan(phnum,3,' ');
+run;
+
+
+data test2;
+input phnum $40.;
+datalines;
+(+91)     0124     :-*  4009752
+    (+91)    011      & 56565698
+(+91)  #% 022  12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1,' -:%#&*');
+STD= scan(phnum,2,' -:%#&*');
+PH= scan(phnum,3,' -:%#&*');
+run;
+proc print ; run;
+
+data test2;
+input phnum $29.;
+datalines;
+(+91)     0124    04009752
+       (+91)     011 56565698 A
+(+91)     022    12345678
+;
+run;
+
+data test3;
+set test2;
+ISD= scan(phnum,1,'+');
+STD= scan(phnum,2,'+');
+PH= scan(phnum,3,' ');
+/* PH1= scan(phnum,4,' '); */
+
+run;
+
+
+
+
+
+
+
+
+data test3;
+x= 'I love India';
+w1= scan(x,-1);
+w2= scan(x,2);
+w3= scan(x,3);
+run;
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname= pre||fname||lname;
+fullname1= compress(pre||fname||lname);
+fullname2= compbl(pre||fname||lname);
+run;
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= '          John  ';
+Lname= '    Stimpson        Jr.   ';
+fullname=trim(pre)||' '||STRIP(fname)||' '||trim(left(lname)) ;
+run;
+
+
+
+
+
+
+data test;
+
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname=  cat(pre,fname,lname);
+run;
+
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson   Jr.    ';
+fullname= cats(pre,fname,lname);
+fullname1= compress(cat(pre,fname,lname));
+run;
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname1= catx('---', pre,fname,lname);
+run;
+
+
+
+
+
+
+
+data test;
+Pre=  'Mr.   ';
+Fname= 'John  ';
+Lname= '    Stimpson    ';
+fullname1= catx( pre,fname,lname);
+run;
+
+
+data test1;
+x= 'Books';
+y= 2013;
+name= x||y;
+name1 = y||x;
+name1 = cats(x,y);
+run;
+
+
+
+
+
+data test1;
+x= 'Books';
+y= '11JAN2017'd;
+name= x||Y ;
+format y date9.;
+run;
+
+
+
+
+
+
+
+
+
+
+
+data test1;
+x= 'Books';
+y= 10;
+name= x||put(y,date9.) ;
+run;
+proc print;
+run;
+
+
+
+/*Assignment*/
+
+data test;
+input dept $ prod $;
+datalines;
+D1 a
+D1 b
+D1 c
+D1 d
+D2 x
+D2 y
+D3 x11
+D3 x12
+D3 x13
+D3 x14
+;
+run;
+/*DESIRED OUTPUT*/
+/*dept products*/
+/*d1 A,B,C,D*/
+/*D2 X,Y*/
+/*D3 X11,X12,X13,X14*/
+
+
+
+DATA TEST;
+X= 1234567890;
+Y= '('||SUBSTR(X,1,3)||')';
+RUN;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
