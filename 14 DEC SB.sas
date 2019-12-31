@@ -1,5 +1,4 @@
 
-
 Data Student_subjects;
 length major $200;
 input id Major $ &;
