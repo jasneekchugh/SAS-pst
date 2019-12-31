@@ -423,6 +423,7 @@ run;
 
 
 
+
 Data D1; input num  var1 $; datalines;
 1 x1
 2 x2
