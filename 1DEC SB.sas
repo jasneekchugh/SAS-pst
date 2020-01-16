@@ -4,6 +4,7 @@ proc sort data=sashelp.prdsal2 out=outputa;
 by country state descending actual;
 run;
 
+
 /* 1.1 $1469 */
 
 /* 1.2 $1096 */
