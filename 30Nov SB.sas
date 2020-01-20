@@ -2,6 +2,7 @@ proc sort data=sashelp.prdsal2 out=t1;
 by country;
 run;
 
+
 DATA pst;
 set t1;
 By country;
