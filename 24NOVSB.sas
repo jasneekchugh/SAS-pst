@@ -3,7 +3,6 @@ set sashelp.class;
 output;
 run;
 
-
 data test;
 x=1;
 output;
