@@ -15,4 +15,5 @@ set sashelp.class;
 if sex='M' then output t1;
 else output t2;
 output;
+
 run;
