@@ -6,7 +6,7 @@ DATALINES;
 ;
 RUN;
 
-/* Year Cutoff */
+/* Year Cutoff  */
 
 OPTIONS YEARCUTOFF=2068;
 data test;
