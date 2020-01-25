@@ -4,6 +4,7 @@ INFORMAT DTOB DATE7.;
 DATALINES;
 02JAN60
 ;
+
 RUN;
 
 /* Year Cutoff  */
