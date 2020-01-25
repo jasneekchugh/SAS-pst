@@ -6,7 +6,6 @@ DATALINES;
 ;
 
 RUN;
-
 /* Year Cutoff  */
 
 OPTIONS YEARCUTOFF=2068;
