@@ -40,12 +40,6 @@ mean= mean(of x1--x3);
 
 run;
 
-
-
-
-
-
-
 data test;
 x1=1; yoyo= 20;x21=1; x3yz=1; x4oo=1; x5676=.;
 tot2 = sum(of x:);
@@ -105,12 +99,6 @@ z= x*y;
 run;
 proc print;
 run;
-
-
-
-
-
-
 
 
 
@@ -191,7 +179,7 @@ run;
 
 /*Character Functions*/
 
-Data test;
+Data test ;
 input nameage $10.;
 datalines;
 24Ram
