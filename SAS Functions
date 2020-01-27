@@ -1,5 +1,5 @@
 
-/* Numeric Fuctions */
+/* Numeric Fuctions * /
 
 data test;
 x1=1; y= 20;x2 =1; x3=1; x4=1; x5=.;
