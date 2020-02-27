@@ -1,7 +1,7 @@
 
 Data Student_subjects;
 length major $200;
-input id Major $ & ;
+input id Major $ &;
 datalines;
 1001 Computer Science and Math
 1002 Business Administration and Computer Science
