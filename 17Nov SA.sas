@@ -9,6 +9,7 @@ run;
 proc rank data=sashelp.class groups=4;
 run;
 
+
 proc rank data=sashelp.class out= jasneek groups=4;
 var weight;
 run;
